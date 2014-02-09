@@ -1,6 +1,6 @@
 {
-  "name": "GruntProjectBoilerplate",
-  "version": "0.0.0",
+  "name": "Validanguage",
+  "version": "1.0.4",
   "dependencies": {
   	"modernizr": "latest",
   	"requirejs": "latest",

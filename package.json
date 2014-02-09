@@ -1,14 +1,14 @@
 {
-  "name": "GruntProjectBoilerplate",
-  "version": "0.0.0",
-  "description": "none",
+  "name": "Validanguage",
+  "version": "1.0.4",
+  "description": "Validanguage javascript validation",
   "main": "Gruntfile.js",
   "repository": {
     "type": "git",
-    "url": "https://notepadwebdev@bitbucket.org/epiphanydevelopers/griff-grunt-project-boilerplate.git"
+    "url": "https://github.com/DrLongGhost/Validanguage.git"
   },
   "keywords": [],
-  "author": "notepadwebdev <stephen.griffin@epiphanysolutions.co.uk>",
+  "author": "DrLongGhost <dan24678@yahoo.com>",
   "license": "",
   "devDependencies": {
     "grunt": "~0.4.1",
