@@ -9,21 +9,7 @@ module.exports = function(grunt) {
       bowerlibs: {
         files: [
           { src: 'src/js/vendor/modernizr.js', dest:'src/js/vendor/modernizr.js' },
-          { src: 'src/js/vendor/require.js', dest:'src/js/vendor/require.js' }
         ]
-      }
-    },
-    requirejs: {
-      compile: {
-        options: {
-          baseUrl: "dist/js/",
-          mainConfigFile: "dist/js/app.js",
-          out: "dist/js/app.js",
-          name: "app",
-          paths: {
-              jquery: "empty:"
-          }
-        }
       }
     },
 
@@ -43,13 +29,13 @@ module.exports = function(grunt) {
     },
 
     // Images
-    imagemin: {                       
-      dynamic: {                        
+    imagemin: {
+      dynamic: {
         files: [{
-          expand: true,                 
-          cwd: 'dist/img/',             
-          src: '**/*.{png,gif}',  
-          dest: 'dist/img/'             
+          expand: true,
+          cwd: 'dist/img/',
+          src: '**/*.{png,gif}',
+          dest: 'dist/img/'
         }]
       }
     },
@@ -59,11 +45,13 @@ module.exports = function(grunt) {
         files: [
           { expand:true, cwd:'bower_components/jquery/',    src:'jquery.min.js', dest: 'src/js/vendor/' },
           { expand:true, cwd:'bower_components/modernizr/', src:'modernizr.js', dest: 'src/js/vendor/' },
-          { expand:true, cwd:'bower_components/requirejs/', src:'require.js', dest: 'src/js/vendor/' }
+          { expand:true, cwd:'bower_components/jquery/',    src:'jquery.min.js', dest: 'src/js/vendor/' },
+          //{ expand:true, cwd:'bower_components/jasmine/', src:'modernizr.js', dest: 'src/js/vendor/' },
+          //{ expand:true, cwd:'bower_components/sinon/', src:'require.js', dest: 'src/js/vendor/' }
         ],
       },
       build: {
-        files: [{ 
+        files: [{
           expand: true,
           cwd: 'src/',
           src: '**/*',
@@ -72,7 +60,21 @@ module.exports = function(grunt) {
       }
     },
 
-    clean: [ 
+    // Testing
+    jasmine : {
+      client: {
+        // Your project's source files
+        src : 'src/**/*.js',
+
+        options: {
+          specs : 'specs/client/*.js',
+          helpers : 'specs/helpers/*.js',
+          keepRunner: true
+        }
+      }
+    },
+
+    clean: [
       'dist/css/main.css',
       'dist/css/normalize.css'
     ],
@@ -84,7 +86,7 @@ module.exports = function(grunt) {
         }
       }
     },
-    
+
     watch: {
       autoprefix: {
         files: ['src/css/main.css'],
@@ -114,7 +116,6 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
@@ -123,10 +124,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-open');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
 
   grunt.registerTask('start', ['copy:bowerlibs', 'uglify:bowerlibs']);
   grunt.registerTask('dev', ['express:dev', 'autoprefixer', 'open', 'watch']);
-  grunt.registerTask('build', ['autoprefixer', 'copy:build', 'requirejs', 'cssmin', 'clean']);
-  //grunt.registerTask('build', ['autoprefixer', 'copy:build', 'requirejs', 'cssmin', 'clean', 'imagemin']);
+  grunt.registerTask('build', ['autoprefixer', 'copy:build', 'cssmin', 'clean']);
+
+  // TODO: grunt.registerTask('test', ['jshint', 'jasmine'])
+  grunt.registerTask('test', 'jasmine:client');
 
 };

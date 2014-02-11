@@ -4,3 +4,5 @@ min
 .project
 *.sublime-project
 *.sublime-workspace
+.grunt*
+_SpecRunner.html
